@@ -14,16 +14,22 @@
 #
 #      ladet das Plugin in der "config.yml" datei !
 #
-#######
-## ##  WIE ES FUNKTIONIERT 
+########
+## ## ##  WIE ES FUNKTIONIERT 
+#
+## # Was spielt es jetzt?
 #
 # sagt einfach einen Satz mit "TV" + "Programm" für eine komplette Ansage
 # oder "Programm" + Sendername für eine spezifische Abfrage
+#
+## # Was spielt es Abends (20:15)
+#
+# "TV" + "Abend" oder "Primetime" für das komplette Hauptabendprogramm
 # 
 # 
 # bei Fragen Twitter: @Muhkuh0815
 # oder github.com/muhkuh0815/SiriProxy-TV
-#
+# Video Vorschau: http://www.youtube.com/watch?v=mTi9EC0M6Hw
 #
 #### ToDo
 #
