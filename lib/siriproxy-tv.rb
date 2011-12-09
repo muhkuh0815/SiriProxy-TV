@@ -54,26 +54,26 @@ class SiriProxy::Plugin::TV < SiriProxy::Plugin
     def dob
     end
  
+ 
+ def tvprogramm(doc)
+ 	shaf = ""
+    doc = Nokogiri::XML(eat("http://www.texxas.de/tv/oesterreichJetzt.xml"))
+ end
+ 
+ def tvprogrammsat(dob)
+ 	shaf = ""
+    dob = Nokogiri::XML(eat("http://www.texxas.de/tv/spartensenderJetzt.xml"))
+ end
+ 
+ 
 # TV Programm
  
 listen_for /(TV|spielt|spielers).*(Programm|Fernsehen)/i do
-    shaf = ""
-    begin
-        doc = Nokogiri::XML(eat("http://www.texxas.de/tv/oesterreichJetzt.xml"))
-        doc.encoding = 'utf-8'
-        dob = Nokogiri::XML(eat("http://www.texxas.de/tv/spartensenderJetzt.xml"))
-        dob.encoding = 'utf-8'
-        rescue Timeout::Error
-        print "Timeout-Error beim Lesen der Seite"
-        say "Timeout-Error beim lesen der Daten", spoken:"teimaut error beim lesen der Daten."
-        request_completed
-        shaf ="timeout"
-        next
-        rescue
-        print "Lesefehler !"
-        shaf ="timeout"
-        next
-    end
+doc = tvprogramm(doc)
+doc.encoding = 'utf-8'
+dob = tvprogrammsat(dob)
+dob.encoding = 'utf-8'
+
     if doc == NIL 
         say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
     elsif dob == NIL
@@ -155,22 +155,9 @@ end
 # ORF 1 
 
 listen_for /(spielt|TV|Programm).*(OR elf eins|Uherek elf eins|ORF eins|wo er F1|brav 1|horst eins|OF eins)/i do
-    shaf = ""
-    begin
-        doc = Nokogiri::XML(eat("http://www.texxas.de/tv/oesterreichJetzt.xml"))
-        doc.encoding = 'utf-8'
-        rescue Timeout::Error
-        print "Timeout-Error beim Lesen der Seite"
-        say "Timeout-Error beim lesen der Daten", spoken:"teimaut error beim lesen der Daten."
-        request_completed
-        shaf ="timeout"
-        next
-        rescue
-        print "Lesefehler !"
-        shaf ="timeout"
-        next
-    end
-    if shaf =="timeout" 
+	doc = tvprogramm(doc)
+	doc.encoding = 'utf-8'
+    if doc == NIL 
         say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
     else
         docs = doc.xpath('//title')
@@ -196,22 +183,9 @@ end
 # ORF 2
 
 listen_for /(spielt|TV|Programm).*(OR elf zwei|Uherek elf zwei|ORF zwei|wo er F2|brav 2|horst zwei|oder F2|OF zwei|oder elf zwei|Uhr auf zwei|Uherek zwei|Uherek F2|Rolf zwei|OR F2|auf zwei)/i do
-    shaf = ""
-    begin
-        doc = Nokogiri::XML(eat("http://www.texxas.de/tv/oesterreichJetzt.xml"))
-        doc.encoding = 'utf-8'
-        rescue Timeout::Error
-        print "Timeout-Error beim Lesen der Seite"
-        say "Timeout-Error beim lesen der Daten", spoken:"teimaut error beim lesen der Daten."
-        request_completed
-        shaf ="timeout"
-        next
-        rescue
-        print "Lesefehler !"
-        shaf ="timeout"
-        next
-    end
-    if shaf =="timeout" 
+	doc = tvprogramm(doc)
+	doc.encoding = 'utf-8'
+	if doc == NIL
         say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
     else
         docs = doc.xpath('//title')
@@ -238,22 +212,9 @@ end
 # ORF 3
 
 listen_for /(spielt|TV|Programm).*(OR elf drei|Uherek elf drei|ORF 3|wo er F3|brav 3|horst drei|hoher F3|oder F3|oder elf drei|OR F3|eures drei)/i do
-    shaf = ""
-    begin
-        doc = Nokogiri::XML(eat("http://www.texxas.de/tv/oesterreichJetzt.xml"))
-        doc.encoding = 'utf-8'
-        rescue Timeout::Error
-        print "Timeout-Error beim Lesen der Seite"
-        say "Timeout-Error beim lesen der Daten", spoken:"teimaut error beim lesen der Daten."
-        request_completed
-        shaf ="timeout"
-        next
-        rescue
-        print "Lesefehler !"
-        shaf ="timeout"
-        next
-    end
-    if shaf =="timeout" 
+    doc = tvprogramm(doc)
+	doc.encoding = 'utf-8'
+	if doc == NIL
         say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
     else
         docs = doc.xpath('//title')
@@ -279,22 +240,9 @@ end
 # ATV +
 
 listen_for /(spielt|TV|Programm).*(ATV|A TV|ab TV|AUTEV|ARTE Frau|ART TV|ARTE TV)/i do
-    shaf = ""
-    begin
-        doc = Nokogiri::XML(eat("http://www.texxas.de/tv/oesterreichJetzt.xml"))
-        doc.encoding = 'utf-8'
-        rescue Timeout::Error
-        print "Timeout-Error beim Lesen der Seite"
-        say "Timeout-Error beim lesen der Daten", spoken:"teimaut error beim lesen der Daten."
-        request_completed
-        shaf ="timeout"
-        next
-        rescue
-        print "Lesefehler !"
-        shaf ="timeout"
-        next
-    end
-    if shaf =="timeout" 
+	doc = tvprogramm(doc)
+	doc.encoding = 'utf-8'
+    if doc == NIL 
         say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
     else
         docs = doc.xpath('//title')
@@ -320,22 +268,9 @@ end
 # Puls 4
 
 listen_for /(spiel|spieles|spielt|TV|Programm).*(Puls 4|Puls vier)/i do
-    shaf = ""
-    begin
-        doc = Nokogiri::XML(eat("http://www.texxas.de/tv/oesterreichJetzt.xml"))
-        doc.encoding = 'utf-8'
-        rescue Timeout::Error
-        print "Timeout-Error beim Lesen der Seite"
-        say "Timeout-Error beim lesen der Daten", spoken:"teimaut error beim lesen der Daten."
-        request_completed
-        shaf ="timeout"
-        next
-        rescue
-        print "Lesefehler !"
-        shaf ="timeout"
-        next
-    end
-    if shaf =="timeout" 
+	doc = tvprogramm(doc)
+	doc.encoding = 'utf-8'
+    if doc == NIL 
         say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
     else
         docs = doc.xpath('//title')
@@ -361,22 +296,9 @@ end
 # Servus TV
 
 listen_for /(spiel|spieles|spielt|TV|Programm).*(Servus|Servus TV)/i do
-    shaf = ""
-    begin
-        doc = Nokogiri::XML(eat("http://www.texxas.de/tv/oesterreichJetzt.xml"))
-        doc.encoding = 'utf-8'
-        rescue Timeout::Error
-        print "Timeout-Error beim Lesen der Seite"
-        say "Timeout-Error beim lesen der Daten", spoken:"teimaut error beim lesen der Daten."
-        request_completed
-        shaf ="timeout"
-        next
-        rescue
-        print "Lesefehler !"
-        shaf ="timeout"
-        next
-    end
-    if shaf =="timeout" 
+	doc = tvprogramm(doc)
+	doc.encoding = 'utf-8'
+    if doc == NIL 
         say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
     else
         docs = doc.xpath('//title')
@@ -402,22 +324,9 @@ end
 # ORF SPORT PLUS
 
 listen_for /(spiel|spieles|spielt|TV|Programm).*(Sport)/i do
-    shaf = ""
-    begin
-        doc = Nokogiri::XML(eat("http://www.texxas.de/tv/oesterreichJetzt.xml"))
-        doc.encoding = 'utf-8'
-        rescue Timeout::Error
-        print "Timeout-Error beim Lesen der Seite"
-        say "Timeout-Error beim lesen der Daten", spoken:"teimaut error beim lesen der Daten."
-        request_completed
-        shaf ="timeout"
-        next
-        rescue
-        print "Lesefehler !"
-        shaf ="timeout"
-        next
-    end
-    if shaf =="timeout" 
+	doc = tvprogramm(doc)
+	doc.encoding = 'utf-8'
+    if doc == NIL
         say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
     else
         docs = doc.xpath('//title')
@@ -444,22 +353,9 @@ end
 # 3SAT
 
 listen_for /(spiel|spieles|spielt|TV|Programm).*(3 Sat|drei SAT|dreisatz|3sat)/i do
-    shaf = ""
-    begin
-        doc = Nokogiri::XML(eat("http://www.texxas.de/tv/spartensenderJetzt.xml"))
-        doc.encoding = 'utf-8'
-        rescue Timeout::Error
-        print "Timeout-Error beim Lesen der Seite"
-        say "Timeout-Error beim lesen der Daten", spoken:"teimaut error beim lesen der Daten."
-        request_completed
-        shaf ="timeout"
-        next
-        rescue
-        print "Lesefehler !"
-        shaf ="timeout"
-        next
-    end
-    if shaf =="timeout" 
+	doc = tvprogrammsat(dob)
+	doc.encoding = 'utf-8'
+    if doc == NIL 
         say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
     else
         docs = doc.xpath('//title')
