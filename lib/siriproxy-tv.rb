@@ -65,6 +65,8 @@ listen_for /(TV|spielt|spielers).*(Programm|Fernsehen)/i do
         dob.encoding = 'utf-8'
         rescue Timeout::Error
         print "Timeout-Error beim Lesen der Seite"
+        say "Timeout-Error beim lesen der Daten", spoken:"teimaut error beim lesen der Daten."
+        request_completed
         shaf ="timeout"
         next
         rescue
@@ -85,18 +87,39 @@ listen_for /(TV|spielt|spielers).*(Programm|Fernsehen)/i do
          	dos = dos.gsub(/<\/?[^>]*>/, "")
         	doss = dos[0,5]
         	if doss == "ORF 1"
+        		if dos["&amp;"]
+        			dos["&amp;"] = "&"
+        		end
         		orf1 = dos
         	elsif doss == "ORF 2"
+        		if dos["&amp;"]
+        			dos["&amp;"] = "&"
+        		end
         		orf2 = dos
         	elsif doss == "ORF 3"
+        		if dos["&amp;"]
+        			dos["&amp;"] = "&"
+        		end
         		orf3 = dos
         	elsif doss == "ATV: "
+        		if dos["&amp;"]
+        			dos["&amp;"] = "&"
+        		end
         		atv = dos
         	elsif doss == "ORF S"
+        		if dos["&amp;"]
+        			dos["&amp;"] = "&"
+        		end
         		orfs = dos
         	elsif doss == "Puls "
+        		if dos["&amp;"]
+        			dos["&amp;"] = "&"
+        		end
         		puls4 = dos
         	elsif doss == "Servu"
+        		if dos["&amp;"]
+        			dos["&amp;"] = "&"
+        		end
         		servus = dos
         	else
         	end
@@ -109,6 +132,9 @@ listen_for /(TV|spielt|spielers).*(Programm|Fernsehen)/i do
         	doss = dos[0,5]
         	
         	if doss == "3SAT:"
+        		if dos["&amp;"]
+        			dos["&amp;"] = "&"
+        		end
         		sat = dos
         	else
         	end
@@ -135,6 +161,8 @@ listen_for /(spielt|TV|Programm).*(OR elf eins|Uherek elf eins|ORF eins|wo er F1
         doc.encoding = 'utf-8'
         rescue Timeout::Error
         print "Timeout-Error beim Lesen der Seite"
+        say "Timeout-Error beim lesen der Daten", spoken:"teimaut error beim lesen der Daten."
+        request_completed
         shaf ="timeout"
         next
         rescue
@@ -152,6 +180,9 @@ listen_for /(spielt|TV|Programm).*(OR elf eins|Uherek elf eins|ORF eins|wo er F1
          	dos = dos.gsub(/<\/?[^>]*>/, "")
         	doss = dos[0,5]
         	if doss == "ORF 1"
+        		if dos["&amp;"]
+        			dos["&amp;"] = "&"
+        		end
         		orf1 = dos
         	end
         	i += 1
@@ -164,13 +195,15 @@ end
 
 # ORF 2
 
-listen_for /(spielt|TV|Programm).*(OR elf zwei|Uherek elf zwei|ORF zwei|wo er F2|brav 2|horst zwei|oder F2|OF zwei)/i do
+listen_for /(spielt|TV|Programm).*(OR elf zwei|Uherek elf zwei|ORF zwei|wo er F2|brav 2|horst zwei|oder F2|OF zwei|oder elf zwei|Uhr auf zwei|Uherek zwei|Uherek F2|Rolf zwei|OR F2|auf zwei)/i do
     shaf = ""
     begin
         doc = Nokogiri::XML(eat("http://www.texxas.de/tv/oesterreichJetzt.xml"))
         doc.encoding = 'utf-8'
         rescue Timeout::Error
         print "Timeout-Error beim Lesen der Seite"
+        say "Timeout-Error beim lesen der Daten", spoken:"teimaut error beim lesen der Daten."
+        request_completed
         shaf ="timeout"
         next
         rescue
@@ -189,6 +222,9 @@ listen_for /(spielt|TV|Programm).*(OR elf zwei|Uherek elf zwei|ORF zwei|wo er F2
         	doss = dos[0,5]
         	
         	if doss == "ORF 2"
+        		if dos["&amp;"]
+        			dos["&amp;"] = "&"
+        		end
         		orf2 = dos
         	end
         	i += 1
@@ -208,6 +244,8 @@ listen_for /(spielt|TV|Programm).*(OR elf drei|Uherek elf drei|ORF 3|wo er F3|br
         doc.encoding = 'utf-8'
         rescue Timeout::Error
         print "Timeout-Error beim Lesen der Seite"
+        say "Timeout-Error beim lesen der Daten", spoken:"teimaut error beim lesen der Daten."
+        request_completed
         shaf ="timeout"
         next
         rescue
@@ -225,6 +263,9 @@ listen_for /(spielt|TV|Programm).*(OR elf drei|Uherek elf drei|ORF 3|wo er F3|br
          	dos = dos.gsub(/<\/?[^>]*>/, "")
         	doss = dos[0,5]
         	if doss == "ORF 3"
+        		if dos["&amp;"]
+        			dos["&amp;"] = "&"
+        		end
         		orf3 = dos
         	end
         	i += 1
@@ -244,6 +285,8 @@ listen_for /(spielt|TV|Programm).*(ATV|A TV|ab TV|AUTEV|ARTE Frau|ART TV|ARTE TV
         doc.encoding = 'utf-8'
         rescue Timeout::Error
         print "Timeout-Error beim Lesen der Seite"
+        say "Timeout-Error beim lesen der Daten", spoken:"teimaut error beim lesen der Daten."
+        request_completed
         shaf ="timeout"
         next
         rescue
@@ -261,6 +304,9 @@ listen_for /(spielt|TV|Programm).*(ATV|A TV|ab TV|AUTEV|ARTE Frau|ART TV|ARTE TV
          	dos = dos.gsub(/<\/?[^>]*>/, "")
         	doss = dos[0,5]
         	if doss == "ATV: "
+        		if dos["&amp;"]
+        			dos["&amp;"] = "&"
+        		end
         		atv = dos
         	end
         	i += 1
@@ -280,6 +326,8 @@ listen_for /(spiel|spieles|spielt|TV|Programm).*(Puls 4|Puls vier)/i do
         doc.encoding = 'utf-8'
         rescue Timeout::Error
         print "Timeout-Error beim Lesen der Seite"
+        say "Timeout-Error beim lesen der Daten", spoken:"teimaut error beim lesen der Daten."
+        request_completed
         shaf ="timeout"
         next
         rescue
@@ -297,6 +345,9 @@ listen_for /(spiel|spieles|spielt|TV|Programm).*(Puls 4|Puls vier)/i do
          	dos = dos.gsub(/<\/?[^>]*>/, "")
         	doss = dos[0,5]
         	if doss == "Puls "
+        		if dos["&amp;"]
+        			dos["&amp;"] = "&"
+        		end
         		puls4 = dos
         	end
         	i += 1
@@ -316,6 +367,8 @@ listen_for /(spiel|spieles|spielt|TV|Programm).*(Servus|Servus TV)/i do
         doc.encoding = 'utf-8'
         rescue Timeout::Error
         print "Timeout-Error beim Lesen der Seite"
+        say "Timeout-Error beim lesen der Daten", spoken:"teimaut error beim lesen der Daten."
+        request_completed
         shaf ="timeout"
         next
         rescue
@@ -333,6 +386,9 @@ listen_for /(spiel|spieles|spielt|TV|Programm).*(Servus|Servus TV)/i do
          	dos = dos.gsub(/<\/?[^>]*>/, "")
         	doss = dos[0,5]
         	if doss == "Servu"
+        		if dos["&amp;"]
+        			dos["&amp;"] = "&"
+        		end
         		servus = dos
         	end
         	i += 1
@@ -352,6 +408,8 @@ listen_for /(spiel|spieles|spielt|TV|Programm).*(Sport)/i do
         doc.encoding = 'utf-8'
         rescue Timeout::Error
         print "Timeout-Error beim Lesen der Seite"
+        say "Timeout-Error beim lesen der Daten", spoken:"teimaut error beim lesen der Daten."
+        request_completed
         shaf ="timeout"
         next
         rescue
@@ -370,7 +428,10 @@ listen_for /(spiel|spieles|spielt|TV|Programm).*(Sport)/i do
         	doss = dos[0,5]
         	
         	if doss == "ORF S"
-        	orfs = dos
+        		if dos["&amp;"]
+        			dos["&amp;"] = "&"
+        		end
+        		orfs = dos
         	end
         	i += 1
         end
@@ -389,6 +450,8 @@ listen_for /(spiel|spieles|spielt|TV|Programm).*(3 Sat|drei SAT|dreisatz|3sat)/i
         doc.encoding = 'utf-8'
         rescue Timeout::Error
         print "Timeout-Error beim Lesen der Seite"
+        say "Timeout-Error beim lesen der Daten", spoken:"teimaut error beim lesen der Daten."
+        request_completed
         shaf ="timeout"
         next
         rescue
@@ -406,6 +469,9 @@ listen_for /(spiel|spieles|spielt|TV|Programm).*(3 Sat|drei SAT|dreisatz|3sat)/i
          	dos = dos.gsub(/<\/?[^>]*>/, "")
         	doss = dos[0,5]
         	if doss == "3SAT:"
+        		if dos["&amp;"]
+        			dos["&amp;"] = "&"
+        		end
         		sat = dos
         	end
         	i += 1
