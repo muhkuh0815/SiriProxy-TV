@@ -61,23 +61,39 @@ class SiriProxy::Plugin::TV < SiriProxy::Plugin
  
  
  def tvprogramm(doc)
+    begin
     doc = Nokogiri::XML(eat("http://www.texxas.de/tv/oesterreichJetzt.xml"))
     return doc
+    rescue
+     	doc = ""
+    end
  end
  
  def tvprogrammabend(doc)
+ 	begin
     doc = Nokogiri::XML(eat("http://www.texxas.de/tv/oesterreich.xml"))
     return doc
+    rescue
+     	doc = ""
+    end
  end
  
  def tvprogrammsat(dob)
+ 	begin
     dob = Nokogiri::XML(eat("http://www.texxas.de/tv/spartensenderJetzt.xml"))
  	return dob
+    rescue
+    	dob = ""
+    end
  end
  
  def tvprogrammsatabend(dob)
+ 	begin
     dob = Nokogiri::XML(eat("http://www.texxas.de/tv/spartensender.xml"))
  	return dob
+    rescue
+    	dob = ""
+    end
  end
  
  def cleanup(doc)
@@ -96,15 +112,14 @@ class SiriProxy::Plugin::TV < SiriProxy::Plugin
 
 listen_for /(TV|spielt|spielers).*(Crime Time|kleinteilen|Abend)/i do
 doc = tvprogrammabend(doc)
-doc.encoding = 'utf-8'
 dob = tvprogrammsatabend(dob)
-dob.encoding = 'utf-8'
-
-    if doc == NIL 
+    if doc == NIL or doc == ""
         say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
-    elsif dob == NIL
+    elsif dob == NIL or dob == ""
    		say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
     else
+    	doc.encoding = 'utf-8'
+    	dob.encoding = 'utf-8'
         docs = doc.xpath('//title')    
         dobs = dob.xpath('//title')            
         i = 1
@@ -168,15 +183,14 @@ end
  
 listen_for /(TV|spielt|spielers).*(Programm|Fernsehen)/i do
 doc = tvprogramm(doc)
-doc.encoding = 'utf-8'
 dob = tvprogrammsat(dob)
-dob.encoding = 'utf-8'
-
-    if doc == NIL 
+    if doc == NIL or doc == "" 
         say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
-    elsif dob == NIL
+    elsif dob == NIL or dob == ""
    		say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
     else
+        doc.encoding = 'utf-8'
+        dob.encoding = 'utf-8'
         docs = doc.xpath('//title')    
         dobs = dob.xpath('//title')            
         i = 1
@@ -238,10 +252,10 @@ end
 
 listen_for /(spielt|TV|Programm).*(OR elf eins|Uherek elf eins|ORF eins|wo er F1|brav 1|horst eins|OF eins)/i do
 	doc = tvprogramm(doc)
-	doc.encoding = 'utf-8'
-    if doc == NIL 
+    if doc == NIL or doc == "" 
         say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
     else
+        doc.encoding = 'utf-8'
         docs = doc.xpath('//title')
         i = 1
         while i < docs.length
@@ -264,10 +278,10 @@ end
 
 listen_for /(spielt|TV|Programm).*(OR elf zwei|Uherek elf zwei|ORF zwei|wo er F2|brav 2|horst zwei|oder F2|OF zwei|oder elf zwei|Uhr auf zwei|Uherek zwei|Uherek F2|Rolf zwei|OR F2|auf zwei)/i do
 	doc = tvprogramm(doc)
-	doc.encoding = 'utf-8'
-	if doc == NIL
+	if doc == NIL or doc == ""
         say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
     else
+        doc.encoding = 'utf-8'
         docs = doc.xpath('//title')
         i = 1
         while i < docs.length
@@ -291,10 +305,10 @@ end
 
 listen_for /(spielt|TV|Programm).*(OR elf drei|Uherek elf drei|ORF 3|wo er F3|brav 3|horst drei|hoher F3|oder F3|oder elf drei|OR F3|eures drei)/i do
     doc = tvprogramm(doc)
-	doc.encoding = 'utf-8'
-	if doc == NIL
+	if doc == NIL or doc == ""
         say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
     else
+        doc.encoding = 'utf-8'
         docs = doc.xpath('//title')
         i = 1
         while i < docs.length
@@ -317,10 +331,10 @@ end
 
 listen_for /(spielt|TV|Programm).*(ATV|A TV|ab TV|AUTEV|ARTE Frau|ART TV|ARTE TV)/i do
 	doc = tvprogramm(doc)
-	doc.encoding = 'utf-8'
-    if doc == NIL 
+	if doc == NIL or doc == ""
         say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
     else
+    	doc.encoding = 'utf-8'
         docs = doc.xpath('//title')
         i = 1
         while i < docs.length
@@ -343,10 +357,10 @@ end
 
 listen_for /(spiel|spieles|spielt|TV|Programm).*(Puls 4|Puls vier)/i do
 	doc = tvprogramm(doc)
-	doc.encoding = 'utf-8'
-    if doc == NIL 
+    if doc == NIL or doc == ""
         say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
     else
+		doc.encoding = 'utf-8'
         docs = doc.xpath('//title')
         i = 1
         while i < docs.length
@@ -369,10 +383,10 @@ end
 
 listen_for /(spiel|spieles|spielt|TV|Programm).*(Servus|Servus TV)/i do
 	doc = tvprogramm(doc)
-	doc.encoding = 'utf-8'
-    if doc == NIL 
+    if doc == NIL or doc == ""
         say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
     else
+    	doc.encoding = 'utf-8'
         docs = doc.xpath('//title')
         i = 1
         while i < docs.length
@@ -395,10 +409,10 @@ end
 
 listen_for /(spiel|spieles|spielt|TV|Programm).*(Sport)/i do
 	doc = tvprogramm(doc)
-	doc.encoding = 'utf-8'
-    if doc == NIL
+    if doc == NIL or doc == ""
         say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
     else
+    	doc.encoding = 'utf-8'
         docs = doc.xpath('//title')
         i = 1
         while i < docs.length
@@ -422,10 +436,10 @@ end
 
 listen_for /(spiel|spieles|spielt|TV|Programm).*(3 Sat|drei SAT|dreisatz|3sat)/i do
 	doc = tvprogrammsat(dob)
-	doc.encoding = 'utf-8'
-    if doc == NIL 
+	if doc == NIL or doc == ""
         say "Es gab ein Problem beim Einlesen des Fernsehprogramms!"
     else
+        doc.encoding = 'utf-8'
         docs = doc.xpath('//title')
         i = 1
         while i < docs.length
