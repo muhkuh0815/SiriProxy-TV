@@ -12,7 +12,7 @@ require 'timeout'
 # and can easily be adoptet for German channels.
 # sorry for the strange code - im just learning Ruby :-) 
 #
-#     Remember to add other plugins to the "config.yml" file if you create them!
+#     Remember to add the plugin to the "./siriproxy/config.yml" file!
 #
 ######
 #
@@ -20,7 +20,7 @@ require 'timeout'
 # Sendungen DVB-T Kanäle vorliest 
 # Kann auch einfach für die deutschen Kanäle angepasst werden (siehe 3SAT) 
 #
-#      ladet das Plugin in der "config.yml" datei !
+#      ladet das Plugin in der "./siriproxy/config.yml" datei !
 #
 ########
 ## ## ##  WIE ES FUNKTIONIERT 
@@ -60,7 +60,7 @@ class SiriProxy::Plugin::TV < SiriProxy::Plugin
     end
  
  
- def tvprogramm(doc)
+ def tvprogramm(doc) # reading whats playing now - Austrian channels
     begin
     doc = Nokogiri::XML(eat("http://www.texxas.de/tv/oesterreichJetzt.xml"))
     return doc
@@ -69,7 +69,7 @@ class SiriProxy::Plugin::TV < SiriProxy::Plugin
     end
  end
  
- def tvprogrammabend(doc)
+ def tvprogrammabend(doc) # reading whats playing in the evening (20:15) - Austrian channels
  	begin
     doc = Nokogiri::XML(eat("http://www.texxas.de/tv/oesterreich.xml"))
     return doc
@@ -78,8 +78,8 @@ class SiriProxy::Plugin::TV < SiriProxy::Plugin
     end
  end
  
- def tvprogrammsat(dob)
- 	begin
+ def tvprogrammsat(dob) # reading whats playing now - 3SAT
+  	begin
     dob = Nokogiri::XML(eat("http://www.texxas.de/tv/spartensenderJetzt.xml"))
  	return dob
     rescue
@@ -87,8 +87,8 @@ class SiriProxy::Plugin::TV < SiriProxy::Plugin
     end
  end
  
- def tvprogrammsatabend(dob)
- 	begin
+ def tvprogrammsatabend(dob) # reading whats playing in the evening (20:15) - 3SAT
+  	begin
     dob = Nokogiri::XML(eat("http://www.texxas.de/tv/spartensender.xml"))
  	return dob
     rescue
@@ -108,7 +108,7 @@ class SiriProxy::Plugin::TV < SiriProxy::Plugin
     return dos
  end
  
-# TV Programm Abend
+# TV Programm Abend - TV Programm Evening - all channels
 
 listen_for /(TV|spielt|spielers).*(Crime Time|kleinteilen|Abend)/i do
 doc = tvprogrammabend(doc)
@@ -123,7 +123,7 @@ dob = tvprogrammsatabend(dob)
         docs = doc.xpath('//title')    
         dobs = dob.xpath('//title')            
         i = 1
-        while i < docs.length
+        while i < docs.length 
         	dos = docs[i].to_s
          	dos = cleanup(dos)
          	doss = dos[0,5]
@@ -179,9 +179,9 @@ dob = tvprogrammsatabend(dob)
 end
 
  
-# TV Programm jetzt
+# TV Programm jetzt - TV Programm NOW all channels
  
-listen_for /(TV|spielt|spielers).*(Programm|Fernsehen)/i do
+listen_for /(TV|spielt|spielers).*(Programm|Fernsehen)/i do 
 doc = tvprogramm(doc)
 dob = tvprogrammsat(dob)
     if doc == NIL or doc == "" 
@@ -248,7 +248,7 @@ dob = tvprogrammsat(dob)
     request_completed
 end
 
-# ORF 1 
+# ORF 1 now
 
 listen_for /(spielt|TV|Programm).*(OR elf eins|Uherek elf eins|ORF eins|wo er F1|brav 1|horst eins|OF eins)/i do
 	doc = tvprogramm(doc)
@@ -274,7 +274,7 @@ listen_for /(spielt|TV|Programm).*(OR elf eins|Uherek elf eins|ORF eins|wo er F1
     request_completed
 end
 
-# ORF 2
+# ORF 2 now
 
 listen_for /(spielt|TV|Programm).*(OR elf zwei|Uherek elf zwei|ORF zwei|wo er F2|brav 2|horst zwei|oder F2|OF zwei|oder elf zwei|Uhr auf zwei|Uherek zwei|Uherek F2|Rolf zwei|OR F2|auf zwei)/i do
 	doc = tvprogramm(doc)
@@ -301,7 +301,7 @@ listen_for /(spielt|TV|Programm).*(OR elf zwei|Uherek elf zwei|ORF zwei|wo er F2
     request_completed
 end
 
-# ORF 3
+# ORF 3 now
 
 listen_for /(spielt|TV|Programm).*(OR elf drei|Uherek elf drei|ORF 3|wo er F3|brav 3|horst drei|hoher F3|oder F3|oder elf drei|OR F3|eures drei)/i do
     doc = tvprogramm(doc)
@@ -327,7 +327,7 @@ listen_for /(spielt|TV|Programm).*(OR elf drei|Uherek elf drei|ORF 3|wo er F3|br
     request_completed
 end
 
-# ATV +
+# ATV + now
 
 listen_for /(spielt|TV|Programm).*(ATV|A TV|ab TV|AUTEV|ARTE Frau|ART TV|ARTE TV)/i do
 	doc = tvprogramm(doc)
@@ -353,7 +353,7 @@ listen_for /(spielt|TV|Programm).*(ATV|A TV|ab TV|AUTEV|ARTE Frau|ART TV|ARTE TV
     request_completed
 end
 
-# Puls 4
+# Puls 4 now
 
 listen_for /(spiel|spieles|spielt|TV|Programm).*(Puls 4|Puls vier)/i do
 	doc = tvprogramm(doc)
@@ -379,7 +379,7 @@ listen_for /(spiel|spieles|spielt|TV|Programm).*(Puls 4|Puls vier)/i do
     request_completed
 end
 
-# Servus TV
+# Servus TV now
 
 listen_for /(spiel|spieles|spielt|TV|Programm).*(Servus|Servus TV)/i do
 	doc = tvprogramm(doc)
@@ -405,7 +405,7 @@ listen_for /(spiel|spieles|spielt|TV|Programm).*(Servus|Servus TV)/i do
     request_completed
 end
 
-# ORF SPORT PLUS
+# ORF SPORT PLUS now
 
 listen_for /(spiel|spieles|spielt|TV|Programm).*(Sport)/i do
 	doc = tvprogramm(doc)
@@ -432,7 +432,7 @@ listen_for /(spiel|spieles|spielt|TV|Programm).*(Sport)/i do
     request_completed
 end
 
-# 3SAT
+# 3SAT now
 
 listen_for /(spiel|spieles|spielt|TV|Programm).*(3 Sat|drei SAT|dreisatz|3sat)/i do
 	doc = tvprogrammsat(dob)

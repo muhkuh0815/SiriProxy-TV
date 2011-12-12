@@ -4,27 +4,27 @@
 # and can easily be adoptet for German channels.
 # sorry for the strange code - im just learning Ruby :-) 
 #
-#     Remember to add other plugins to the "config.yml" file if you create them!
+#     Remember to add the plugin to the "./siriproxy/config.yml" file!
 #
 ######
 #
-# Das ist ein einfaches TV Programm plugin, welches die aktuellen 쉝terreichischen
-# Sendungen DVB-T Kan둳e vorliest 
-# Kann auch einfach f웦 die deutschen Kan둳e angepasst werden (siehe 3SAT) 
+# Das ist ein einfaches TV Programm plugin, welches die aktuellen 철sterreichischen
+# Sendungen DVB-T Kan채le vorliest 
+# Kann auch einfach f체r die deutschen Kan채le angepasst werden (siehe 3SAT) 
 #
-#      ladet das Plugin in der "config.yml" datei !
+#      ladet das Plugin in der "./siriproxy/config.yml" datei !
 #
 ########
 ## ## ##  WIE ES FUNKTIONIERT 
 #
 ## # Was spielt es jetzt?
 #
-# sagt einfach einen Satz mit "TV" + "Programm" f웦 eine komplette Ansage
-# oder "Programm" + Sendername f웦 eine spezifische Abfrage
+# sagt einfach einen Satz mit "TV" + "Programm" f체r eine komplette Ansage
+# oder "Programm" + Sendername f체r eine spezifische Abfrage
 #
 ## # Was spielt es Abends (20:15)
 #
-# "TV" + "Abend" oder "Primetime" f웦 das komplette Hauptabendprogramm
+# "TV" + "Abend" oder "Primetime" f체r das komplette Hauptabendprogramm
 # 
 # 
 # bei Fragen Twitter: @Muhkuh0815
@@ -33,9 +33,8 @@
 #
 #### ToDo
 #
-# Zeitabfrage - wie lange die sendung noch l둼ft
-# Primetime (20:15) Abfrage
+# Zeitabfrage - wie lange die sendung noch l채uft
 # bei spezifischer Abfrage - aktuelle + 2 folgende Sendungen
-# Info Abfrage f웦 Sendungsbeschreibung 
+# Info Abfrage f체r Sendungsbeschreibung 
 #
 ######
