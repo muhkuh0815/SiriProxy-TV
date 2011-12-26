@@ -165,15 +165,21 @@ dob = tvprogrammsatabend(dob)
         	end
         	i += 1
         end
-        	say "Programm für 20:15", spoken: "Programm für 20 Uhr 15"
-            say orf1
-            say orf2
-            say orf3
-            say atv
-            say sat
-            say puls4
-            say servus
-      		say orfs
+        	say "", spoken: "Programm für 20 Uhr 15"
+            object = SiriAddViews.new
+    		object.make_root(last_ref_id)
+    		answer = SiriAnswer.new("TV Programm - 20:15", [
+    	  		SiriAnswerLine.new(orf1), 
+    	  		SiriAnswerLine.new(orf2), 
+    	  		SiriAnswerLine.new(orf3), 
+    	  		SiriAnswerLine.new(atv),
+    	  		SiriAnswerLine.new(sat), 
+    	  		SiriAnswerLine.new(puls4), 
+    	  		SiriAnswerLine.new(servus),  
+    	  		SiriAnswerLine.new(orfs)
+    	  		])
+    		object.views << SiriAnswerSnippet.new([answer])
+    		send_object object
         end    
     request_completed
 end
@@ -236,14 +242,23 @@ dob = tvprogrammsat(dob)
         	end
         	i += 1
         end
-            say orf1
-            say orf2
-            say orf3
-            say atv
-            say sat
-            say puls4
-            say servus
-      		say orfs
+         	say "", spoken: "Es spielt gerade."
+      		
+			object = SiriAddViews.new
+    		object.make_root(last_ref_id)
+    		answer = SiriAnswer.new("TV Programm - aktuell", [
+    	  		SiriAnswerLine.new(orf1), 
+    	  		SiriAnswerLine.new(orf2), 
+    	  		SiriAnswerLine.new(orf3), 
+    	  		SiriAnswerLine.new(atv),
+    	  		SiriAnswerLine.new(sat), 
+    	  		SiriAnswerLine.new(puls4), 
+    	  		SiriAnswerLine.new(servus),  
+    	  		SiriAnswerLine.new(orfs)
+    	  		])
+    		object.views << SiriAnswerSnippet.new([answer])
+    		send_object object
+      		
         end    
     request_completed
 end
