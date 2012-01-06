@@ -1,40 +1,70 @@
-#######
-# 
-# This is a simple XML parsing Plugin for Austrian DVB-T Television Channels 
-# and can easily be adoptet for German channels.
-# sorry for the strange code - im just learning Ruby :-) 
-#
-#     Remember to add the plugin to the "./siriproxy/config.yml" file!
-#
-######
-#
-# Das ist ein einfaches TV Programm plugin, welches die aktuellen österreichischen
-# Sendungen DVB-T Kanäle vorliest 
-# Kann auch einfach für die deutschen Kanäle angepasst werden (siehe 3SAT) 
-#
-#      ladet das Plugin in der "./siriproxy/config.yml" datei !
-#
-########
-## ## ##  WIE ES FUNKTIONIERT 
-#
-## # Was spielt es jetzt?
-#
-# sagt einfach einen Satz mit "TV" + "Programm" für eine komplette Ansage
-# oder "Programm" + Sendername für eine spezifische Abfrage
-#
-## # Was spielt es Abends (20:15)
-#
-# "TV" + "Abend" oder "Primetime" für das komplette Hauptabendprogramm
-# 
-# 
-# bei Fragen Twitter: @Muhkuh0815
-# oder github.com/muhkuh0815/SiriProxy-TV
-# Video Vorschau: http://www.youtube.com/watch?v=mTi9EC0M6Hw
-#
-#### ToDo
-#
-# Zeitabfrage - wie lange die sendung noch läuft
-# bei spezifischer Abfrage - aktuelle + 2 folgende Sendungen
-# Info Abfrage für Sendungsbeschreibung 
-#
-######
+###
+# siriproxy-tv Plugin
+
+
+This is a simple XML parsing Plugin for Austrian DVB-T Television Channels 
+and can easily be adoptet for German channels.
+sorry for the strange code - im just learning Ruby :-) 
+
+     Remember to load the plugin in the "./siriproxy/config.yml" file!
+
+Das ist ein einfaches TV Programm plugin, welches die aktuellen österreichischen
+Sendungen DVB-T Kanäle vorliest 
+Kann auch einfach für die deutschen Kanäle angepasst werden (siehe 3SAT) 
+
+      ladet das Plugin in der "./siriproxy/config.yml" datei !
+
+
+###
+# WIE ES FUNKTIONIERT 
+
+## Was spielt es jetzt?
+
+sagt einfach einen Satz mit "TV" + "Programm" für eine komplette Ansage
+oder "Programm" + Sendername für eine spezifische Abfrage
+
+## Was spielt es Abends (20:15)
+
+"TV" + "Abend" oder "Primetime" für das komplette Hauptabendprogramm (20:15)
+ 
+
+
+###
+# Installation
+
+Ihr benötigt Siriproxy 0.3.0:
+
+einfach folgende Zeilen in die User/xxx/.siriproxy/config.yml Datei einfügen (Vorsicht mit Zeilenumbrüchen!!)
+
+- name: 'TV'
+  git: 'git://github.com/muhkuh0815/SiriProxy-TV.git'
+
+danach einmal Siriproxy update
+die Plugin Dateien liegen dann in
+/User/xxx/.rvm/gems/ruby-1.9.3/bundler/gems/SiriProxy-TV
+Vorsicht beim editieren, bei jedem Siriproxy update werden sie wieder überschrieben.
+
+
+Falls ihr das Plugin für euch anpassen wollt empfehle ich die Plugindateien von github runterzuladen und sie in
+/User/xxx/Siriproxy/plugins/siriproxy-tv
+zu kopieren.
+Der richtige Eintrag in der config.yml Datei wäre dann:
+
+- name: 'TV'
+  path: '/Users/xxx/SiriProxy/plugins/siriproxy-tv'
+
+
+### 
+# ToDo
+
+Zeitabfrage - wie lange die sendung noch läuft
+bei spezifischer Abfrage - aktuelle + 2 folgende Sendungen
+Info Abfrage für Sendungsbeschreibung 
+
+
+###
+# Kontakt
+ 
+bei Fragen Twitter: @Muhkuh0815
+oder github.com/muhkuh0815/SiriProxy-TV
+Video Vorschau: http://www.youtube.com/watch?v=mTi9EC0M6Hw
