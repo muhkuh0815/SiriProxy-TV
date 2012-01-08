@@ -1,0 +1,16 @@
+#Example configuration options that can be placed in your main SiriProxy config.yml
+
+##########################
+#NOTICE: Modifying these options in this file has no effect. You must put them in SiriProxy's config.yml!
+##########################
+    
+    - name: 'TV'
+      git: 'git://github.com/muhkuh0815/SiriProxy-TV.git'
+      
+###
+# If you want to edit the plugin you can download the zip version at github 
+# and put it in e.g. /User/yourusername/Siriproxy/Plugins/siriproxy-nichtlustig/
+# the lines in the config.yml file should then be
+
+    - name: 'TV'
+      path: '/Users/yourusername/SiriProxy/plugins/siriproxy-tv'
